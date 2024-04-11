@@ -2,23 +2,23 @@
 This project implements a time series multivariate analysis using RNN/LSTM for stock price predictions. A deep RNN model was created and trained on five years of historical Google stock price data to forecast the stock performance over a two-month period.
 
 ## Data Set ([Google Stock Price](https://finance.yahoo.com/quote/GOOG/history))
-The dataset utilized in this analysis comprises historical records for the stock price of [Alphabet Inc. (GOOG)](https://finance.yahoo.com/quote/GOOG/history), captured on daily basis.
+The dataset utilized comprises historical records for the stock price of [Alphabet Inc. (GOOG)](https://finance.yahoo.com/quote/GOOG/history), captured on daily basis.
 
 The dataset is sourced from [Yahoo Finance](https://finance.yahoo.com/) and contains the following fields: *Opening price, Highest price, Lowest price, Closing price, Adjusted closing price, and Trading volume*.
 
-Initially, the entire dataset was initially explored and then a specific time period was selected to perform training, validation, and predictions as follows:
+Initially, the entire dataset was explored and then a specific time period was selected to perform training, validation, and predictions as follows:
 
-- **Training data:** from Jan, 2019 till June, 2023.
-- **Validation data:** from July, 2023 till Dec, 2023.
+- **Training data:** from Jan 2019 till June 2023.
+- **Validation data:** from July 2023 till Dec 2023.
 - **Testing data:** first two months of 2024.
 
-The raw, interim and preprocessed datasets can be located in their corresponding subfolders in the main [data](data) directory.
+The raw, interim, and preprocessed datasets can be located in their corresponding subfolders in the main [data](data) directory.
 
 ## Stock Prediction Details
 The project is implemented in three consecutive phases simulating the essential data processing and analysis steps. <br/>
 - Each phase is represented in a corresponding notebook inside the [notebooks](notebooks) directory.
 - Intermediary data files are stored inside the [data](data) directory.
-- Intermediary and final models are stored inside the [models](models) directory.
+- Auxiliary and final models are stored inside the [models](models) directory.
 
 ### PHASE 1 - Explanatory Data Analysis
 > Corresponding notebook:  [data-explanatory-analysis.ipynb](https://github.com/sinanw/lstm-stock-price-prediction/blob/main/notebooks/1-data-explanatory-analysis.ipynb)
@@ -49,14 +49,14 @@ Implemented data processing and transformation tasks:
 Implemented training and prediction tasks:
 1. Load preprocessed dataset files (train, validate, test).
 2. Construct data structures by creating input sequences.
-3. Build LSTM Model using [TenserFlow Sequential](https://www.tensorflow.org/api_docs/python/tf/keras/Sequential) model:
-    - First [Input](https://www.tensorflow.org/api_docs/python/tf/keras/Input) layer.
+3. Build LSTM Model using [TenserFlow Sequential](https://www.tensorflow.org/api_docs/python/tf/keras/Sequential):
+    - First [Input](https://www.tensorflow.org/api_docs/python/tf/keras/layers/InputLayer) layer.
     - 4x [LSTM](https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM) layers: units = 100
     - 4x [Dropout](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dropout) layers: rate = 0.2
-    - Final [Dense](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense) layers with a single neuron.
+    - Final [Dense](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense) layer with a single unit.
 4. Compile LSTM model:
     - Optimizer: [Adam](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam)
-    - Loss: [Meas Squared Error](https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredError)
+    - Loss: [Mean Squared Error](https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredError)
 5. Train LSTM model:
     - Epochs: 200
     - Batch size: 64
